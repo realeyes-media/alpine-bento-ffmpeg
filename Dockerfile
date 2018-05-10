@@ -1,6 +1,12 @@
 FROM quay.io/realeyes/alpine-node-git
 ENV PATH="$PATH:/bin/bash" \
-    BENTO4_BIN="/opt/bento4/bin"
+    BENTO4_BIN="/opt/bento4/bin" \
+    BENTO4_BASE_URL="http://zebulon.bok.net/Bento4/source/" \
+    BENTO4_VERSION="1-5-0-623" \
+    BENTO4_CHECKSUM="0d70ffa2b4631f1246f91592af9d2759bbc86be3" \
+    BENTO4_TARGET="" \
+    BENTO4_PATH="/opt/bento4" \
+    BENTO4_TYPE="SRC"
 
 # docker container time must be up to date
 RUN apk add --update sudo openntpd
@@ -12,8 +18,8 @@ RUN apk add --update ffmpeg
 # Install Bento
 WORKDIR /tmp/bento4
 ENV BENTO4_BASE_URL="http://zebulon.bok.net/Bento4/source/" \
-    BENTO4_VERSION="1-5-0-615" \
-    BENTO4_CHECKSUM="5378dbb374343bc274981d6e2ef93bce0851bda1" \
+    BENTO4_VERSION="1-5-0-623" \
+    BENTO4_CHECKSUM="0d70ffa2b4631f1246f91592af9d2759bbc86be3" \
     BENTO4_TARGET="" \
     BENTO4_PATH="/opt/bento4" \
     BENTO4_TYPE="SRC"
