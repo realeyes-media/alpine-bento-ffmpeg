@@ -2,32 +2,25 @@ FROM quay.io/realeyes/alpine-node-git
 ENV PATH="$PATH:/bin/bash" \
     BENTO4_BIN="/opt/bento4/bin" \
     BENTO4_BASE_URL="http://zebulon.bok.net/Bento4/source/" \
-    BENTO4_VERSION="1-5-0-623" \
+    BENTO4_VERSION="1-5-1-623" \
     BENTO4_CHECKSUM="0d70ffa2b4631f1246f91592af9d2759bbc86be3" \
     BENTO4_TARGET="" \
     BENTO4_PATH="/opt/bento4" \
     BENTO4_TYPE="SRC"
 
-# docker container time must be up to date
-RUN apk add --update sudo openntpd
-RUN ntpd -dn -p north-america.pool.ntp.org
+# Install dependencies and FFMPEG
+RUN apk add --update sudo openntpd python unzip bash gcc g++ scons ffmpeg
 
-# FFMPEG
-RUN apk add --update ffmpeg
+# docker container time must be up to date
+RUN ntpd -dn -p north-america.pool.ntp.org
     
 # Install Bento
 WORKDIR /tmp/bento4
-ENV BENTO4_BASE_URL="http://zebulon.bok.net/Bento4/source/" \
-    BENTO4_VERSION="1-5-0-623" \
-    BENTO4_CHECKSUM="0d70ffa2b4631f1246f91592af9d2759bbc86be3" \
-    BENTO4_TARGET="" \
-    BENTO4_PATH="/opt/bento4" \
-    BENTO4_TYPE="SRC"
-    # download and unzip bento4
-RUN apk add --update --upgrade curl python unzip bash gcc g++ scons && \
-    curl -O -s ${BENTO4_BASE_URL}/Bento4-${BENTO4_TYPE}-${BENTO4_VERSION}${BENTO4_TARGET}.zip && \
-    sha1sum -b Bento4-${BENTO4_TYPE}-${BENTO4_VERSION}${BENTO4_TARGET}.zip | grep -o "^$BENTO4_CHECKSUM " && \
-    mkdir -p ${BENTO4_PATH} && \
+    # download and check bento4
+RUN wget ${BENTO4_BASE_URL}Bento4-${BENTO4_TYPE}-${BENTO4_VERSION}.zip && \
+    sha1sum -b Bento4-${BENTO4_TYPE}-${BENTO4_VERSION}${BENTO4_TARGET}.zip | grep -o "^$BENTO4_CHECKSUM "
+    # Unzip
+RUN mkdir -p ${BENTO4_PATH} && \
     unzip Bento4-${BENTO4_TYPE}-${BENTO4_VERSION}${BENTO4_TARGET}.zip -d ${BENTO4_PATH} && \
     rm -rf Bento4-${BENTO4_TYPE}-${BENTO4_VERSION}${BENTO4_TARGET}.zip && \
     apk del unzip && \
