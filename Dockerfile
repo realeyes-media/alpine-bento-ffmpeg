@@ -1,5 +1,5 @@
 FROM quay.io/realeyes/alpine-node-git
-ENV PATH="$PATH:/bin/bash" \
+ENV PATH="$PATH:/bin/bash:/opt/bento4/bin" \
     BENTO4_BIN="/opt/bento4/bin" \
     BENTO4_BASE_URL="http://zebulon.bok.net/Bento4/source/" \
     BENTO4_VERSION="1-5-1-624" \
