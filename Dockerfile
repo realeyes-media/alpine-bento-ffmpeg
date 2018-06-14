@@ -1,4 +1,4 @@
-FROM quay.io/realeyes/alpine-node-git
+FROM mhart/alpine-node:8
 ENV PATH="$PATH:/bin/bash:/opt/bento4/bin" \
     BENTO4_BIN="/opt/bento4/bin" \
     BENTO4_BASE_URL="http://zebulon.bok.net/Bento4/source/" \
