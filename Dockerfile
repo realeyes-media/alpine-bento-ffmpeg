@@ -2,8 +2,8 @@ FROM mhart/alpine-node:8
 ENV PATH="$PATH:/bin/bash:/opt/bento4/bin" \
     BENTO4_BIN="/opt/bento4/bin" \
     BENTO4_BASE_URL="http://zebulon.bok.net/Bento4/source/" \
-    BENTO4_VERSION="1-5-1-624" \
-    BENTO4_CHECKSUM="eae7e2a0714a9dc2b9390fdbc1632851a29d42c3" \
+    BENTO4_VERSION="1-5-1-627" \
+    BENTO4_CHECKSUM="bfd302b028694a545c93c4d363dde0e18ba79901" \
     BENTO4_TARGET="" \
     BENTO4_PATH="/opt/bento4" \
     BENTO4_TYPE="SRC"
